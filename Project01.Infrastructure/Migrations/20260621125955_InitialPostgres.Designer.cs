@@ -12,7 +12,7 @@ using Store.Infrastructure.DbContexts;
 namespace Store.Infrastructure.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20260621123714_InitialPostgres")]
+    [Migration("20260621125955_InitialPostgres")]
     partial class InitialPostgres
     {
         /// <inheritdoc />
