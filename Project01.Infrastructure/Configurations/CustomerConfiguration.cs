@@ -13,7 +13,7 @@ namespace Store.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.Property(x => x.CreatedAt).HasDefaultValueSql("GETDATE()");
+            builder.Property(x => x.CreatedAt).HasDefaultValueSql("NOW()");
         }
     }
 }

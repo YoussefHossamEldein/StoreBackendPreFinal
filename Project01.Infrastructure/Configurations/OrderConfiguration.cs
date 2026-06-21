@@ -13,7 +13,7 @@ namespace Store.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.Property(x => x.CreatedAt).HasDefaultValueSql("GETDATE()");
+            builder.Property(x => x.CreatedAt).HasDefaultValueSql("NOW()");
             builder.HasOne(x => x.Customer).WithMany(c => c.CustomerOrders).HasForeignKey(x => x.CustomerId);
             builder.HasMany(x => x.OrderItems).WithOne(oi => oi.Order).HasForeignKey(oi => oi.OrderId);
         }

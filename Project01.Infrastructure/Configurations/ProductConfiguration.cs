@@ -17,7 +17,7 @@ namespace Store.Infrastructure.Configurations
             builder.Property(p => p.IsAvailable).HasDefaultValue(true).IsRequired();
             builder.Property(p => p.Price).HasPrecision(18, 2).IsRequired();
             builder.Property(p => p.Category).HasMaxLength(100).IsRequired();
-            builder.Property(x => x.CreatedAt).HasDefaultValueSql("GETDATE()");
+            builder.Property(x => x.CreatedAt).HasDefaultValueSql("NOW()");
             builder.HasMany(x => x.OrderItems).WithOne(oi => oi.Product).HasForeignKey(oi => oi.ProductId);
         }
     }
