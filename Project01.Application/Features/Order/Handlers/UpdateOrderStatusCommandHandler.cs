@@ -23,7 +23,7 @@ namespace Store.Application.Features.Orders.Handlers
             if (order == null)
                 return false;
             order.Status = request.Status;
-            order.UpdatedAt = DateTime.Now;
+            order.UpdatedAt = DateTime.UtcNow;
             return await _orderRepository.UpdateAsync(order);
         }
     }

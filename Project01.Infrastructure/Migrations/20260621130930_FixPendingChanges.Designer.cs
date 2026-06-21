@@ -12,8 +12,8 @@ using Store.Infrastructure.DbContexts;
 namespace Store.Infrastructure.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20260621125955_InitialPostgres")]
-    partial class InitialPostgres
+    [Migration("20260621130930_FixPendingChanges")]
+    partial class FixPendingChanges
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,7 +236,7 @@ namespace Store.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -261,7 +261,7 @@ namespace Store.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("integer");
@@ -297,7 +297,7 @@ namespace Store.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("integer");
@@ -339,7 +339,7 @@ namespace Store.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<bool>("IsAvailable")
                         .ValueGeneratedOnAdd()
