@@ -23,7 +23,7 @@ namespace Store.Infrastructure.DependencyInjection
             this IServiceCollection services,IConfiguration configuration)
         {
             services.AddDbContext<StoreDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IJwtService, JwtService>();

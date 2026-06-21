@@ -1,5 +1,7 @@
 
 using MediatR;
+using Store.Infrastructure.DbContexts;
+using Microsoft.EntityFrameworkCore;
 using Store.Infrastructure.DependencyInjection;
 using Store.Infrastructure.DependencyInjection;
 using System.Reflection;
@@ -74,6 +76,11 @@ namespace StoreManagement
             app.UseAuthorization();
 
             app.MapControllers();
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<StoreDbContext>();
+                db.Database.Migrate();
+            }
             app.Run();
         }
     }
