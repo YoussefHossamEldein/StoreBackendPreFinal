@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Application.DTOs.Order;
 using Store.Application.Features.Orders.Commands;
@@ -16,12 +17,14 @@ namespace Store.API.Controllers
             _mediator = mediator;
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             var result = await _mediator.Send(new GetAllOrdersQuery());
             return Ok(result);
         }
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _mediator.Send(new GetOrderByIdQuery(id));
@@ -30,6 +33,7 @@ namespace Store.API.Controllers
             return NoContent();
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([FromBody] CreateOrderDto dto)
         {
             try
@@ -39,10 +43,12 @@ namespace Store.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(new { message = ex.Message, InnerException = ex.InnerException?.Message }
+                      );
             }
         }
         [HttpPut("{id}/status")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Update(int id , [FromQuery]string status)
         {
             var result = await _mediator.Send(new UpdateOrderStatusCommand(id, status));
@@ -51,6 +57,7 @@ namespace Store.API.Controllers
             return NoContent();
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _mediator.Send(new DeleteOrderCommand(id));

@@ -19,6 +19,7 @@ namespace Store.Application.Features.Orders.Handlers
             IGenericRepository<Product> prodectRepository)
         {
             _orderRepository = orderRepository;
+            _productRepository = prodectRepository;
         }
         public async Task<OrderDto> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
@@ -59,7 +60,7 @@ namespace Store.Application.Features.Orders.Handlers
                 Id = created.Id,
                 OrderDate = created.OrderDate,
                 TotalAmount = created.TotalAmount
-            }
+            };
         }
     }
 }

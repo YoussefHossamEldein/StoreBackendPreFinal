@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Store.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Store.Infrastructure.DbContexts
 {
-    public class StoreDbContext : DbContext
+    public class StoreDbContext : IdentityDbContext<AppUser>
     {
         public StoreDbContext(DbContextOptions<StoreDbContext> options):base(options)
         {
@@ -20,6 +21,7 @@ namespace Store.Infrastructure.DbContexts
         public DbSet<Customer> Customers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(StoreDbContext).Assembly);
         }
     }
