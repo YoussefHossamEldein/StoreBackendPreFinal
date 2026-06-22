@@ -27,7 +27,7 @@ namespace Store.Application.Features.Orders.Handlers
             {
                 Status = "Pending",
                 CustomerId = request.Dto.CustomerId,
-                OrderDate = DateTime.Now,
+                OrderDate = DateTime.UtcNow,
                 OrderItems = new List<OrderItem>()
 
             };
